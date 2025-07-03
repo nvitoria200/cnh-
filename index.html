@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aluguel de Veículos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Aluguel de Veículos</h1>
+        <nav>
+            <a href="#" id="home-link">Início</a>
+            <a href="#" id="vehicles-link">Veículos</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="login-section" class="active">
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="username">Usuário:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="password">Senha:</label>
+                <input type="password" id="password" name="password" required>
+                <button type="submit">Entrar</button>
+                <p id="login-message" class="error"></p>
+            </form>
+        </section>
+
+        <section id="home-section" class="hidden">
+            <h2>Bem-vindo à Locadora de Veículos!</h2>
+            <p>Escolha o carro dos seus sonhos e comece sua jornada.</p>
+            <div class="vehicle-gallery">
+                </div>
+        </section>
+
+        <section id="vehicle-details-section" class="hidden">
+            <h2>Detalhes do Veículo</h2>
+            <div id="selected-vehicle-info">
+                </div>
+            <h3>Dados do Motorista</h3>
+            <form id="driver-details-form">
+                <label for="driver-name">Nome Completo:</label>
+                <input type="text" id="driver-name" name="driver-name" required>
+                <label for="driver-cnh">Número da CNH:</label>
+                <input type="text" id="driver-cnh" name="driver-cnh" required>
+                <button type="submit" id="rent-button">Finalizar Pedido</button>
+            </form>
+            <p id="rent-message" class="success"></p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
