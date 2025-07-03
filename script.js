@@ -12,16 +12,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const vehiclesLink = document.getElementById('vehicles-link');
     const vehicleGallery = document.querySelector('.vehicle-gallery');
     const selectedVehicleInfo = document.getElementById('selected-vehicle-info');
+    const backToVehiclesButton = document.getElementById('back-to-vehicles'); // Novo botão de voltar
 
     let loggedIn = false;
     let selectedVehicle = null;
 
-    // Dados dos veículos (simulados) - AQUI ESTÁ A ALTERAÇÃO PARA A IMAGEM DO SEU CARRO
+    // Dados dos veículos (com as suas imagens)
     const vehicles = [
-        { id: 1, name: 'Volkswagen Gol', dailyRate: 80, image: 'https://via.placeholder.com/300x180/007bff/FFFFFF?text=Volkswagen+Gol' },
-        { id: 2, name: 'Fiat Argo', dailyRate: 120, image: 'carro.png' }, // Caminho para a sua imagem
-        { id: 3, name: 'Chevrolet Onix', dailyRate: 90, image: 'https://via.placeholder.com/300x180/007bff/FFFFFF?text=Chevrolet+Onix' },
-        { id: 4, name: 'Toyota Corolla', dailyRate: 150, image: 'https://via.placeholder.com/300x180/007bff/FFFFFF?text=Toyota+Corolla' }
+        { id: 1, name: 'Volkswagen Gol', dailyRate: 80, image: 'volkswagengol.png' },
+        { id: 2, name: 'Fiat Argo', dailyRate: 120, image: 'carro.png' }, // Mantive seu carro.png
+        { id: 3, name: 'Chevrolet Onix', dailyRate: 90, image: 'chevroletonix.png' },
+        { id: 4, name: 'Toyota Corolla', dailyRate: 150, image: 'toyotacorolla.png' }
     ];
 
     // Função para mostrar uma seção e esconder as outras
@@ -66,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>Diária: R$ ${vehicle.dailyRate.toFixed(2)}</p>
             <p>Para alugar este veículo, preencha os dados do motorista abaixo.</p>
         `;
+        // Limpa a mensagem de aluguel e o formulário ao selecionar um novo veículo
+        rentMessage.textContent = '';
+        driverDetailsForm.reset();
         showSection(vehicleDetailsSection);
     }
 
@@ -102,8 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             rentMessage.textContent = `Aluguel do ${selectedVehicle.name} efetuado com sucesso para ${driverName}! Sua CNH: ${driverCnh}.`;
             rentMessage.classList.remove('error');
             rentMessage.classList.add('success');
-            driverDetailsForm.reset(); // Limpa o formulário
-            selectedVehicle = null; // Reseta o veículo selecionado
+            // Não resetamos o formulário imediatamente para o usuário ver a mensagem de sucesso.
+            // O formulário será resetado se ele voltar para a seleção de veículos e depois selecionar outro.
         } else {
             rentMessage.textContent = 'Por favor, preencha todos os dados do motorista.';
             rentMessage.classList.remove('success');
@@ -111,7 +115,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Eventos de navegação
+    // Evento do botão "Voltar aos Veículos"
+    backToVehiclesButton.addEventListener('click', () => {
+        showSection(homeSection);
+        selectedVehicle = null; // Limpa o veículo selecionado
+        rentMessage.textContent = ''; // Limpa a mensagem de aluguel
+        driverDetailsForm.reset(); // Limpa o formulário
+    });
+
+
+    // Eventos de navegação do cabeçalho
     homeLink.addEventListener('click', (e) => {
         e.preventDefault();
         if (loggedIn) {
